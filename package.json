@@ -1,8 +1,7 @@
 {
   "name": "create-koa-tiny",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Your`s description",
-  "type": "module",
   "files": ["."],
   "repository": {
     "type": "git",
