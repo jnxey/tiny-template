@@ -1,4 +1,4 @@
-# {{projectName}}
+# Project
 Your`s description
 
 ## Setup
