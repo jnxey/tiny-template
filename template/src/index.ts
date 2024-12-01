@@ -4,7 +4,7 @@ import Router from '@koa/router';
 
 import serve from 'koa-static';
 import jsonwebtoken from 'jsonwebtoken';
-import { getLocalIPS, getStoragePath, printError } from '@/tools';
+import { getStoragePath, printError } from '@/tools';
 import { setDocs } from '@/middleware/docs';
 import { koaBody } from 'koa-body';
 import config from '@/config';
@@ -38,8 +38,5 @@ app.on('error', (err) => {
 
 app.listen(config.port, () => {
   console.log(`Server is running on:`);
-  const ips = getLocalIPS();
-  ips.forEach((ip) => {
-    console.log(`- URL:   http://${ip}:${config.port}`);
-  });
+  console.log(`- URL:   http://localhost:${config.port}`);
 });

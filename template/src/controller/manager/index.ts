@@ -1,8 +1,8 @@
-import { Post, Json, Summary, Dto, StatusCode } from 'koa-tiny';
+import { Get, Json, Summary, Dto, StatusCode } from 'koa-tiny';
 import { ExtendableContext, Next } from 'koa';
 
 export class Manager {
-  @Post()
+  @Get()
   @Json()
   @Summary('This is a summary')
   public async index(ctx: ExtendableContext, next: Next) {
