@@ -3,7 +3,9 @@
   "version": "1.0.2",
   "description": "Your`s description",
   "files": [
-    "."
+    "/bin/",
+    "README.md",
+    "/template/"
   ],
   "repository": {
     "type": "git",
