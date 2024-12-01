@@ -1,6 +1,6 @@
 {
   "name": "create-koa-tiny",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Your`s description",
   "files": [
     "/bin/",
