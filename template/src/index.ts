@@ -1,40 +1,33 @@
-import Tiny, { Controller } from 'koa-tiny';
-import Koa from 'koa';
-import Router from '@koa/router';
-
-import serve from 'koa-static';
-import jsonwebtoken from 'jsonwebtoken';
-import { getStoragePath, printError } from '@/tools';
-import { setDocs } from '@/middleware/docs';
-import { koaBody } from 'koa-body';
+import { CreateApp, Router } from 'node-tiny';
 import config from '@/config';
-import { Manager } from '@/controller/manager';
+import { Home } from '@/controller/home';
+import { swagger } from '@/plugins/swagger';
+import { BodyParser } from '@/plugins/body';
 
-const app = new Koa();
+const app = new CreateApp();
 const router = new Router();
 
-// 解析body内的json以及urlencoded
-app.use(koaBody());
+app.run = async (context) => {
+  const result = swagger(context, router);
+  if (result) return;
+  BodyParser.parse<object | string>(context.req)
+    .then((body) => {
+      context.setBody(body);
+      router.work(context);
+    })
+    .catch((err) => {
+      context.error(err);
+    });
+};
 
-// 初始化配置
-Tiny.init({
-  controller: { prefix: '/api/' },
-  jwt: { expiresIn: '4h', jsonwebtoken: jsonwebtoken }
-});
+app.error = (err) => {
+  // ...
+  console.error(err);
+};
 
-// 绑定模块
-Controller.connect<Manager>(new Manager(), router);
+router.config({ prefix: '/api' });
 
-// 中间件配置
-app.use(router.routes());
-app.use(router.allowedMethods());
-app.use(setDocs(Controller.apiInfoJson));
-app.use(serve(getStoragePath()));
-
-// 全局错误处理
-app.on('error', (err) => {
-  printError(err);
-});
+router.register(new Home());
 
 app.listen(config.port, () => {
   console.log(`Server is running on:`);

@@ -1,17 +1,5 @@
-# Project
-Your`s description
+# tiny
+A simple node service framework
 
-## Setup
-```shell
-npm install
-```
-
-## Development
-```shell
-npm run dev
-```
-
-## Production
-```shell
-npm run build
-```
+##
+> 建议Node版本为18.17.1

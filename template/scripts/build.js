@@ -15,23 +15,19 @@ export default {
     format: 'esm',
     chunkFileNames: '[name].js',
     manualChunks: {
-      // 手动指定共享的 chunk 文件
       mysql: ['mysql'],
-      'koa-body': ['koa-body'],
-      'crypto-js': ['crypto-js'],
-      koa: ['koa'],
-      'koa-router': ['@koa/router'],
-      jsonwebtoken: ['jsonwebtoken'],
-      jsencrypt: ['src/tools/jsencrypt/index.js']
+      jsonwebtoken: ['jsonwebtoken']
     }
   },
 
   plugins: [
     typescript(),
-    rollupResolve(),
+    rollupResolve({
+      preferBuiltins: true
+    }),
     commonjs(),
     json(),
-    visualizer({ open: true }),
+    visualizer({ open: false }),
     alias({
       entries: [{ find: '@', replacement: resolve(rootDir, 'src') }]
     })
