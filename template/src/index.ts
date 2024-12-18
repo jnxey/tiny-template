@@ -1,14 +1,14 @@
 import { CreateApp, Router } from 'node-tiny';
 import config from '@/config';
 import { Home } from '@/controller/home';
-import { swagger } from '@/plugins/swagger';
+import { Swagger } from '@/plugins/swagger';
 import { BodyParser } from '@/plugins/body';
 
 const app = new CreateApp();
 const router = new Router();
 
 app.run = async (context) => {
-  const result = swagger(context, router);
+  const result = Swagger(context, router);
   if (result) return;
   BodyParser.parse<object | string>(context.req)
     .then((body) => {

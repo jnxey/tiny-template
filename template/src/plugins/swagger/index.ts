@@ -80,7 +80,7 @@ function generateSwaggerJSON(apiJSON, options: SwaggerOptions) {
   return swaggerJSON;
 }
 
-export function swagger(context, router) {
+export function Swagger(context, router) {
   if (context.req.url === '/swagger/openapi.json') {
     const json = generateSwaggerJSON(router.apiJSON, { port: config.port });
     context.send(StatusCode.success, JSON.stringify(json), DataType.text);
