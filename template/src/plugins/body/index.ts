@@ -10,6 +10,7 @@ export class BodyParser {
    */
   public static parse<T>(req): Promise<T> {
     return new Promise((resolve, reject) => {
+      if (req.method !== 'POST' && req.method !== 'PUT' && req.method !== 'PATCH') return resolve(null);
       const contentType = req.headers['content-type'];
       const decoder = new StringDecoder('utf-8');
       let rawData = '';
